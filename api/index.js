@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
-
+const ws = require('ws');
 
 dotenv.config();
 try{
@@ -80,6 +80,9 @@ app.get('/profile', async (req, res) =>{
     }
 });
 
-app.listen(8800, () =>{
-    console.log("Server is running on port 8800");
-});
+const server =  app.listen(8800, () =>{
+        console.log("Server is running on port 8800");
+    });
+
+
+const wss = new ws.WebSocketServer({server});

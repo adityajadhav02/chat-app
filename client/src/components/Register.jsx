@@ -20,8 +20,11 @@ const Register = () => {
     }
 
   return (
-    <div className='bg-blue-50 h-screen flex items-center'>
+    <div className='bg-blue-100 h-screen flex items-center'>
         <form className='w-64 mx-auto' onSubmit={handleSubmit}>
+            <h1 className='font-bold text-2xl mb-5 text-gray-800 text-center mr-0 pr-0'>Chatter
+            <span className='text-blue-500 font-bold text-3xl'>.</span>
+             </h1>
             <input value={username} 
                 onChange={e => setUsername(e.target.value)} 
                 type="text" placeholder='username' 
@@ -31,7 +34,7 @@ const Register = () => {
                 onChange={e => setPassword(e.target.value)}
                 type="password" placeholder='password' 
                 className='block  w-full rounded-sm mb-2 p-2 outline-blue-500' />
-            <button className='bg-blue-500 text-white w-full rounded-sm p-2'>
+            <button className='bg-blue-500 text-white w-full rounded-sm p-2 mt-2'>
             {isLoginOrRegister === 'register' ? 'Register' : 'Login'}
             </button>
             <div className='text-center mt-2'>
