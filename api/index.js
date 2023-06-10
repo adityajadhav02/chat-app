@@ -82,7 +82,35 @@ app.get('/profile', async (req, res) =>{
 
 const server =  app.listen(8800, () =>{
         console.log("Server is running on port 8800");
-    });
-
+});
 
 const wss = new ws.WebSocketServer({server});
+wss.on('connection', (connection, req) =>{
+    const cookies = req.headers.cookie;
+    // console.log(cookies);
+    if(cookies){
+        const tokenString = cookies.split('; ').find(str => str.startsWith('token='));
+        // console.log(tokenString);
+        if(tokenString){
+            const token = tokenString.split('=')[1];
+            if(token){
+                jwt.verify(token, jwtSecret, {}, (err, userData) =>{
+                    if(err) throw err;
+                    
+                    // else we have the user data in data var
+                    const {userId, username} = userData;
+                    connection.userId = userId;
+                    connection.username = username;
+                })  
+            }
+        }
+    }
+    // console.log([...wss.clients].map((u) => u.username));
+
+    [...wss.clients].forEach(client =>{
+        client.send(JSON.stringify({
+            online: [...wss.clients].map(c => ({userId: c.userId, username: c.username}))
+        }
+        ))
+    })
+});
