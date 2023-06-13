@@ -7,6 +7,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const ws = require('ws');
+const Message = require('./models/Message');
 
 dotenv.config();
 try{
@@ -86,11 +87,11 @@ const server =  app.listen(8800, () =>{
 
 const wss = new ws.WebSocketServer({server});
 wss.on('connection', (connection, req) =>{
+
+    // get username and id from cookie
     const cookies = req.headers.cookie;
-    // console.log(cookies);
     if(cookies){
         const tokenString = cookies.split('; ').find(str => str.startsWith('token='));
-        // console.log(tokenString);
         if(tokenString){
             const token = tokenString.split('=')[1];
             if(token){
@@ -105,7 +106,28 @@ wss.on('connection', (connection, req) =>{
             }
         }
     }
-    // console.log([...wss.clients].map((u) => u.username));
+
+    connection.on('message', async (message) =>{
+        const messageData = JSON.parse(message.toString());
+        
+        const {reciever, text} = messageData;
+        if(reciever && text){
+
+            const messageDoc = await Message.create({
+                sender: connection.userId,
+                reciever, 
+                text, 
+            });
+
+            [...wss.clients].filter(c => c.userId === reciever)
+            .forEach(c => c.send(JSON.stringify({
+                text, 
+                sender:connection.userId, 
+                reciever,
+                id: messageDoc._id,
+            })));
+        }
+    });
 
     [...wss.clients].forEach(client =>{
         client.send(JSON.stringify({
