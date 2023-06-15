@@ -122,7 +122,7 @@ app.get("/messages/:userId", async (req, res) => {
     res.json(messages);
 })
 
-const server =  app.listen(process.env.PORT || 8800, () =>{
+const server =  app.listen(8800, () =>{
         console.log("Server is running..");
 });
 
