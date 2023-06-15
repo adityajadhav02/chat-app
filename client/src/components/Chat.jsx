@@ -23,7 +23,7 @@ const Chat = () => {
     }, [selectedUserId]);
 
     function connectToWebSocket() {
-        const ws = new WebSocket('wss://chat-server-green.vercel.app');
+        const ws = new WebSocket('wss://chat-server-green.vercel.app:8800');
         // const ws = new WebSocket('ws://chat-server-green.vercel.app/');
         setWs(ws);
         ws.addEventListener('message', handleMessage);
