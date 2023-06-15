@@ -122,8 +122,8 @@ app.get("/messages/:userId", async (req, res) => {
     res.json(messages);
 })
 
-const server =  app.listen(8800, () =>{
-        console.log("Server is running on port 8800");
+const server =  app.listen(process.env.PORT || 8800, () =>{
+        console.log("Server is running..");
 });
 
 const wss = new ws.WebSocketServer({server});
