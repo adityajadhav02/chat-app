@@ -141,7 +141,7 @@ const Chat = () => {
 
     return (
         <div className='flex h-screen'>
-            <div className="bg-white w-1/3 flex flex-col">
+            <div className="bg-slate-800 w-1/3 flex flex-col overflow-y-auto">
                 <div className='flex-grow'>
                     <Logo />
                     {
@@ -171,18 +171,18 @@ const Chat = () => {
                     }
                 </div>
                 <div className='p-2 text-center flex items-center justify-center'>
-                    <span className='mr-4 flex items-center text-gray-600'>
+                    <span className='mr-4 flex items-center text-slate-500'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                             <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
                         </svg>
                         Hello, {username}</span>
-                    <button onClick={logout} className='text-sm text-gray-500 bg-blue-100 rounded-md border py-1 px-2'>
+                    <button onClick={logout} className='text-sm text-red-600 bg-slate-700 rounded-md  py-1 px-2'>
                         Logout
                     </button>
                 </div>
             </div>
 
-            <div className="bg-blue-100 w-2/3 p-2 flex flex-col">
+            <div className="bg-slate-900 w-2/3 p-2 flex flex-col">
                 <div className="flex-grow messages">
                     {!selectedUserId && (
                         <div className='flex flex-col items-center justify-center h-full'>
@@ -192,10 +192,10 @@ const Chat = () => {
                 </div>
                 {!!selectedUserId && (
                     <div className='relative h-full'>
-                        <div className='absolute inset-0 overflow-y-scroll'>
+                        <div className='absolute inset-0 overflow-auto'>
                             {msgWithoutDups.map((msg) => (
                                 <div key={msg._id} className={(msg.sender === id ? ' text-right' : ' text-left')}>
-                                    <div className={'max-w-lg text-left inline-block p-2 m-2 rounded-md  ' + (msg.sender === id ? 'bg-blue-500 text-white' : 'bg-white text-gray-500')}>
+                                    <div className={'max-w-lg text-left inline-block p-2 m-2 rounded-md  ' + (msg.sender === id ? 'bg-blue-500 text-white' : 'bg-slate-300 text-slate-700')}>
                                         {msg.text}
                                         {msg.file &&(
                                             <div>
@@ -213,13 +213,13 @@ const Chat = () => {
                 )}
 
                 {!!selectedUserId && (
-                    <form className='flex gap-2' onSubmit={sendMessage}>
+                    <form className='flex gap-2 mt-2' onSubmit={sendMessage}>
                         <input type="text" placeholder='Type your message here'
-                            className='bg-white p-2 flex-grow border outline-blue-500 rounded-md'
+                            className='text-white bg-slate-800 p-2 flex-grow outline-none rounded-md'
                             value={newMessageText}
                             onChange={e => setNewMessageText(e.target.value)}
                         />
-                        <label type='button' className='cursor-pointer bg-gray-300 p-2 rounded-md text-blue-500'>
+                        <label type='button' className='cursor-pointer bg-slate-800 p-2 rounded-md text-blue-500'>
                         <input type="file" className='hidden' onChange={sendFile} />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                 <path fillRule="evenodd" d="M18.97 3.659a2.25 2.25 0 00-3.182 0l-10.94 10.94a3.75 3.75 0 105.304 5.303l7.693-7.693a.75.75 0 011.06 1.06l-7.693 7.693a5.25 5.25 0 11-7.424-7.424l10.939-10.94a3.75 3.75 0 115.303 5.304L9.097 18.835l-.008.008-.007.007-.002.002-.003.002A2.25 2.25 0 015.91 15.66l7.81-7.81a.75.75 0 011.061 1.06l-7.81 7.81a.75.75 0 001.054 1.068L18.97 6.84a2.25 2.25 0 000-3.182z" clipRule="evenodd" />

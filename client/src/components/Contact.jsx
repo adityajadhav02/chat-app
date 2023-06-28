@@ -4,7 +4,7 @@ import Avatar from './Avatar';
 const Contact = ({id, username, onClick, selected, online}) => {
     return (
         <div key={id} onClick={() => onClick(id)}
-            className={"flex items-center gap-4 border-b border-gray-300  cursor-pointer " + (selected ? 'bg-blue-100' : '')} >
+            className={"flex items-center gap-4 border-b border-gray-900  cursor-pointer " + (selected ? 'bg-gray-900' : '')} >
             {
                 selected && (
                     <div className='w-1 bg-blue-500 h-16 rounded-r-md   '>
@@ -18,7 +18,7 @@ const Contact = ({id, username, onClick, selected, online}) => {
                     username={username}
                     userId={id}
                 />
-                <span className='font-semibold text-lg'>
+                <span className='text-white font-semibold text-lg'>
                     {username}
                 </span>
             </div>

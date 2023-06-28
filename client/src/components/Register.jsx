@@ -22,7 +22,7 @@ const Register = () => {
   return (
     <div className='bg-blue-100 h-screen flex items-center'>
         <form className='w-64 mx-auto' onSubmit={handleSubmit}>
-            <h1 className='font-bold text-2xl mb-5 text-gray-800 text-center mr-0 pr-0'>Chatter
+            <h1 className='font-bold text-2xl mb-5 text-gray-800 text-center mr-0 pr-0'>ChatSpot
             <span className='text-blue-500 font-bold text-3xl'>.</span>
              </h1>
             <input value={username} 
