@@ -4,7 +4,8 @@ import Routes from "./Routes";
 import { UserContextProvider } from "./UserContext";
 function App() {
   
-  axios.defaults.baseURL = 'https://chat-server-green.vercel.app';
+  // axios.defaults.baseURL = 'https://chat-server-green.vercel.app';
+  axios.defaults.baseURL = 'https://chatspot-backend.onrender.com/';
   axios.defaults.withCredentials = true;
 
   return (
